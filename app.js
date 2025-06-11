@@ -38,6 +38,7 @@ function updateNumOutput(digit) {
     leftSide += digit;
     leftSideOtp.textContent = leftSide;
   } else {
+    rightSideOtp.style.display = "inline";
     rightSide += digit;
     rightSideOtp.textContent = rightSide;
   }
@@ -50,6 +51,10 @@ function updateOperatorOutput(op) {
   if (op === "=") {
     if (leftSide === "" && operator === "" && rightSide === "") return;
     const result = calculateResult();
+    if (!result) {
+      clear();
+      return;
+    }
     showingResult = true;
     leftSideOtp.style.display = "none";
     operatorOtp.style.display = "none";
@@ -57,7 +62,7 @@ function updateOperatorOutput(op) {
     return;
   }
   if (leftSide === "") {
-    leftSide = 0;
+    leftSide = "0";
     leftSideOtp.textContent = 0;
     leftSideOtp.style.display = "inline";
   }
@@ -69,7 +74,12 @@ function calculateResult() {
   if (operator === "+") return Number(leftSide) + Number(rightSide);
   else if (operator === "-") return Number(leftSide) - Number(rightSide);
   else if (operator === "*") return Number(leftSide) * Number(rightSide);
-  else if (operator === "/") return Number(leftSide) / Number(rightSide);
+  else if (operator === "/") {
+    if (leftSide === "0" && rightSide === "0") {
+      alert(`Cannot divide 0 by 0`);
+      return false;
+    } else return Number(leftSide) / Number(rightSide);
+  }
 }
 
 function clear() {
@@ -77,9 +87,9 @@ function clear() {
   operator = "";
   rightSide = "";
 
-  leftSideOtp.style.display = "none";
+  leftSideOtp.style.display = "inline";
   operatorOtp.style.display = "none";
-  rightSideOtp.style.display = "inline";
+  rightSideOtp.style.display = "none";
 
   leftSideOtp.textContent = "0";
   operatorOtp.textContent = "0";

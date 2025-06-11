@@ -8,42 +8,46 @@
   <script src="app.js" defer></script>
 </head>
 <body>
-  <span id="leftSide" class="calculationOutput">0</span>
-  <span id="operator" class="calculationOutput">0</span>
-  <span id="rightSide" class="calculationOutput">0</span>
-  <div class="controls">
-    <div class="row">
-        <button type="button" class="clear-btn">Clear</button>
+  <div class="wrapper">
+    <div class="output">
+      <span id="leftSide" class="calculationOutput">0</span>
+      <span id="operator" class="calculationOutput">0</span>
+      <span id="rightSide" class="calculationOutput">0</span>
     </div>
-    <div class="digits">
-      <div class="row">
-        <button type="button" class="digit">7</button>
-        <button type="button" class="digit">8</button>
-        <button type="button" class="digit">9</button>
+    <div class="controls">
+      <div class="left-side">
+        <div class="clear-btn-container">
+          <button type="button" class="clear-btn">C</button>
       </div>
-      <div class="row">
-        <button type="button" class="digit">4</button>
-        <button type="button" class="digit">5</button>
-        <button type="button" class="digit">6</button>
-      </div>
-      <div class="row">
-        <button type="button" class="digit">1</button>
-        <button type="button" class="digit">2</button>
-        <button type="button" class="digit">3</button>
-      </div>
-      <div class="row">
-        <button type="button" class="digit">0</button>
-      </div>
-    </div>
-    <div class="operators">
-        <div class="column">
-          <button type="button" class="operator">/</button>
-          <button type="button" class="operator">*</button>
-          <button type="button" class="operator">-</button>
-          <button type="button" class="operator">+</button>
-          <button type="button" class="operator">=</button>
+      <div class="digits">
+        <div class="row">
+          <button type="button" class="digit">7</button>
+          <button type="button" class="digit">8</button>
+          <button type="button" class="digit">9</button>
+        </div>
+        <div class="row">
+          <button type="button" class="digit">4</button>
+          <button type="button" class="digit">5</button>
+          <button type="button" class="digit">6</button>
+        </div>
+        <div class="row">
+          <button type="button" class="digit">1</button>
+          <button type="button" class="digit">2</button>
+          <button type="button" class="digit">3</button>
+        </div>
+        <div class="row">
+          <button type="button" class="digit">0</button>
         </div>
       </div>
+      </div>
+      <div class="operators">
+            <button type="button" class="operator">/</button>
+            <button type="button" class="operator">*</button>
+            <button type="button" class="operator">-</button>
+            <button type="button" class="operator">+</button>
+            <button type="button" class="operator">=</button>
+        </div>
+    </div>
   </div>
 </body>
 </html>
