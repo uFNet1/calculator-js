@@ -12,7 +12,6 @@ let rightSide = "";
 
 let containsDecimalLeft = false;
 let containsDecimalRight = false;
-let showingResult = false;
 
 digitsDiv.onclick = (event) => {
   const target = event.target;
@@ -31,72 +30,34 @@ clearBtn.onclick = (event) => {
 };
 
 function updateNumOutput(digit) {
-  if (showingResult) {
-    showingResult = false;
-    clear();
-  }
   if (operator === "") {
-    if (digit === "." && containsDecimalLeft) {
-      return;
-    }
-    if (digit === "." && !containsDecimalLeft) {
-      if (leftSide === "") return;
-      containsDecimalLeft = true;
-    }
+    if (digit === "." && leftSide.includes(".")) return;
 
     leftSideOtp.style.display = "inline";
     leftSide += digit;
     leftSideOtp.textContent = leftSide;
   } else {
-    if (digit === "." && containsDecimalRight) {
-      return;
-    }
-    if (digit === "." && !containsDecimalRight) {
-      if (leftSide === "") return;
-      containsDecimalRight = true;
-    }
-
+    if (digit === "." && rightSide.includes(".")) return;
     rightSideOtp.style.display = "inline";
     rightSide += digit;
     rightSideOtp.textContent = rightSide;
   }
 }
 function updateOperatorOutput(op) {
-  if (showingResult) {
-    showingResult = false;
-    leftSide = rightSideOtp.textContent;
-    leftSideOtp.textContent = leftSide;
-    leftSideOtp.style.display = "inline";
-    rightSide = "";
-    rightSideOtp.textContent = "";
-    rightSideOtp.style.display = "none";
-    // clear();
-  }
-  if (op === "=") {
-    if (leftSide === "" && operator === "" && rightSide === "") return;
-    let result = calculateResult();
-    if (!result) {
-      clear();
-      return;
-    }
-    //TODO ROUND Result
-    if (!Number.isInteger(result)) {
-      result = Number.parseFloat(result).toFixed(1);
-    }
-    showingResult = true;
-    leftSideOtp.style.display = "none";
-    operatorOtp.style.display = "none";
-    rightSideOtp.textContent = result;
+  if (op === "=" && operator !== "") {
+    showResult();
+  } else if (op === "=" && operator === "") {
     return;
+  } else if (op !== "=" && operator !== "") {
+    showResult();
+    operator = op;
+    operatorOtp.textContent = operator;
+    operatorOtp.style.display = "inline";
+  } else if (op !== "=" && operator === "") {
+    operatorOtp.style.display = "inline";
+    operator = op;
+    operatorOtp.textContent = operator;
   }
-  if (leftSide === "") {
-    leftSide = "0";
-    leftSideOtp.textContent = 0;
-    leftSideOtp.style.display = "inline";
-  }
-  operatorOtp.style.display = "inline";
-  operator = op;
-  operatorOtp.textContent = operator;
 }
 function calculateResult() {
   if (operator === "+") return Number(leftSide) + Number(rightSide);
@@ -108,6 +69,24 @@ function calculateResult() {
       return false;
     } else return Number(leftSide) / Number(rightSide);
   }
+}
+
+function showResult() {
+  if (leftSide === "" && operator === "" && rightSide === "") return;
+  let result = calculateResult();
+  if (!result) {
+    // clear();
+    return;
+  }
+  //TODO ROUND Result
+  if (!Number.isInteger(result)) {
+    result = Number.parseFloat(result).toFixed(1);
+  }
+
+  clear();
+  leftSide = String(result);
+  leftSideOtp.textContent = result;
+  return result;
 }
 
 function clear() {
@@ -125,7 +104,6 @@ function clear() {
 
   containsDecimalLeft = false;
   containsDecimalRight = false;
-  showingResult = false;
 }
 
 clear();
