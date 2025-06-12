@@ -10,6 +10,8 @@ let leftSide = "";
 let operator = "";
 let rightSide = "";
 
+let containsDecimalLeft = false;
+let containsDecimalRight = false;
 let showingResult = false;
 
 digitsDiv.onclick = (event) => {
@@ -34,10 +36,26 @@ function updateNumOutput(digit) {
     clear();
   }
   if (operator === "") {
+    if (digit === "." && containsDecimalLeft) {
+      return;
+    }
+    if (digit === "." && !containsDecimalLeft) {
+      if (leftSide === "") return;
+      containsDecimalLeft = true;
+    }
+
     leftSideOtp.style.display = "inline";
     leftSide += digit;
     leftSideOtp.textContent = leftSide;
   } else {
+    if (digit === "." && containsDecimalRight) {
+      return;
+    }
+    if (digit === "." && !containsDecimalRight) {
+      if (leftSide === "") return;
+      containsDecimalRight = true;
+    }
+
     rightSideOtp.style.display = "inline";
     rightSide += digit;
     rightSideOtp.textContent = rightSide;
@@ -63,7 +81,7 @@ function updateOperatorOutput(op) {
     }
     //TODO ROUND Result
     if (!Number.isInteger(result)) {
-      result = Number.parseFloat(result).toFixed(4);
+      result = Number.parseFloat(result).toFixed(1);
     }
     showingResult = true;
     leftSideOtp.style.display = "none";
@@ -104,6 +122,10 @@ function clear() {
   leftSideOtp.textContent = "0";
   operatorOtp.textContent = "0";
   rightSideOtp.textContent = "0";
+
+  containsDecimalLeft = false;
+  containsDecimalRight = false;
+  showingResult = false;
 }
 
 clear();
