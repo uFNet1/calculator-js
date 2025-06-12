@@ -49,6 +49,7 @@ button {
 .controls {
   display: flex;
   gap: 8px;
+  justify-content: end;
 }
 
 .operators,
@@ -65,9 +66,6 @@ button {
   gap: 8px;
 }
 
-.wrapper {
-  display: inline-block;
-}
 
 .calculationOutput {
   color: white;

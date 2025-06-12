@@ -56,10 +56,14 @@ function updateOperatorOutput(op) {
   }
   if (op === "=") {
     if (leftSide === "" && operator === "" && rightSide === "") return;
-    const result = calculateResult();
+    let result = calculateResult();
     if (!result) {
       clear();
       return;
+    }
+    //TODO ROUND Result
+    if (!Number.isInteger(result)) {
+      result = Number.parseFloat(result).toFixed(4);
     }
     showingResult = true;
     leftSideOtp.style.display = "none";
