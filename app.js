@@ -1,6 +1,7 @@
 const digitsDiv = document.querySelector(".digits");
 const operatorsDiv = document.querySelector(".operators");
-const clearBtn = document.querySelector(".clear-btn");
+const clearBtn = document.querySelector("#clear-btn");
+const removeBtn = document.querySelector("#remove-btn");
 
 const leftSideOtp = document.querySelector("#leftSide");
 const operatorOtp = document.querySelector("#operator");
@@ -28,6 +29,9 @@ operatorsDiv.onclick = (event) => {
 clearBtn.onclick = (event) => {
   clear();
 };
+removeBtn.onclick = () => {
+  remove();
+};
 
 function updateNumOutput(digit) {
   if (operator === "") {
@@ -41,6 +45,13 @@ function updateNumOutput(digit) {
     rightSideOtp.style.display = "inline";
     rightSide += digit;
     rightSideOtp.textContent = rightSide;
+  }
+
+  if (leftSideOtp.textContent.length > 1) {
+    removeBtn.style.opacity = "100%";
+  }
+  if (operator !== "" && rightSideOtp.textContent.length <= 1) {
+    removeBtn.style.opacity = "0";
   }
 }
 function updateOperatorOutput(op) {
@@ -106,4 +117,34 @@ function clear() {
   containsDecimalRight = false;
 }
 
+function remove() {
+  if (leftSide === "") {
+    return;
+  } else if (leftSide !== "" && operator === "" && rightSide === "") {
+    if (leftSideOtp.textContent === "0" || leftSide.length <= 1) return;
+    else {
+      leftSide = removeLastElement(leftSide);
+      leftSideOtp.textContent = leftSide;
+    }
+  } else if (rightSide !== "") {
+    if (rightSideOtp.textContent === "0" || rightSide.length <= 1) return;
+    else {
+      rightSide = removeLastElement(rightSide);
+      rightSideOtp.textContent = rightSide;
+    }
+  }
+  if (
+    leftSideOtp.textContent.length <= 1 ||
+    (operator !== "" && rightSideOtp.textContent.length <= 1)
+  ) {
+    console.log("test");
+    removeBtn.style.opacity = "0";
+  }
+}
+
+function removeLastElement(string) {
+  const numbers = string.split("");
+  numbers.pop();
+  return numbers.join("");
+}
 clear();

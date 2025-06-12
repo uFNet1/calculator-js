@@ -76,3 +76,6 @@ button {
   margin-bottom: 16px;
   text-align: end;
 }
+#remove-btn {
+  opacity: 0;
+}
