@@ -147,4 +147,22 @@ function removeLastElement(string) {
   numbers.pop();
   return numbers.join("");
 }
+
+function keyboardListener() {
+  // const supportedKeys = "0123456789.*--+=Backspace";
+  const digitsArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+  const operatorsArr = ["*", "-", "/", "+", "="];
+  const functionalKeysArr = ["Backspace"];
+  document.addEventListener("keydown", (event) => {
+    const keyName = event.key;
+    if (digitsArr.includes(keyName)) {
+      updateNumOutput(keyName);
+    } else if (operatorsArr.includes(keyName)) {
+      updateOperatorOutput(keyName);
+    } else if (functionalKeysArr.includes(keyName)) {
+      remove();
+    }
+  });
+}
+keyboardListener();
 clear();
