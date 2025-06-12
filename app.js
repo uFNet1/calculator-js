@@ -46,7 +46,13 @@ function updateNumOutput(digit) {
 function updateOperatorOutput(op) {
   if (showingResult) {
     showingResult = false;
-    clear();
+    leftSide = rightSideOtp.textContent;
+    leftSideOtp.textContent = leftSide;
+    leftSideOtp.style.display = "inline";
+    rightSide = "";
+    rightSideOtp.textContent = "";
+    rightSideOtp.style.display = "none";
+    // clear();
   }
   if (op === "=") {
     if (leftSide === "" && operator === "" && rightSide === "") return;
