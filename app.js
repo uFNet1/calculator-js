@@ -3,6 +3,7 @@ const operatorsDiv = document.querySelector(".operators");
 const clearBtn = document.querySelector("#clear-btn");
 const removeBtn = document.querySelector("#remove-btn");
 
+const prevResult = document.querySelector("#prevResult");
 const leftSideOtp = document.querySelector("#leftSide");
 const operatorOtp = document.querySelector("#operator");
 const rightSideOtp = document.querySelector("#rightSide");
@@ -71,15 +72,18 @@ function updateOperatorOutput(op) {
   }
 }
 function calculateResult() {
-  if (operator === "+") return Number(leftSide) + Number(rightSide);
-  else if (operator === "-") return Number(leftSide) - Number(rightSide);
-  else if (operator === "×") return Number(leftSide) * Number(rightSide);
+  let result = 0;
+  if (operator === "+") result = Number(leftSide) + Number(rightSide);
+  else if (operator === "-") result = Number(leftSide) - Number(rightSide);
+  else if (operator === "×") result = Number(leftSide) * Number(rightSide);
   else if (operator === "÷") {
     if (leftSide === "0" && rightSide === "0") {
       alert(`Cannot divide 0 by 0`);
       return false;
-    } else return Number(leftSide) / Number(rightSide);
+    } else result = Number(leftSide) / Number(rightSide);
   }
+  prevResult.textContent = leftSide + " " + operator + " " + rightSide;
+  return result;
 }
 
 function showResult() {

@@ -97,7 +97,14 @@ body {
   gap: 8px;
 }
 
-
+.previous-result {
+  color: rgb(116, 116, 116);
+  text-align: center;
+  padding-bottom: .25rem;
+}
+#prevResult {
+  font-size: 0.75rem;
+}
 .calculationOutput {
   color: white;
   font-size: 48px;
