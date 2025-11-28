@@ -65,7 +65,8 @@ body {
 }
 
 .operator {
-  background-color: #ffb341;
+  background-color: #fcab32;
+  font-weight: bold;
 }
 
 .operator:active {

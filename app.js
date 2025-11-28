@@ -73,8 +73,8 @@ function updateOperatorOutput(op) {
 function calculateResult() {
   if (operator === "+") return Number(leftSide) + Number(rightSide);
   else if (operator === "-") return Number(leftSide) - Number(rightSide);
-  else if (operator === "*") return Number(leftSide) * Number(rightSide);
-  else if (operator === "/") {
+  else if (operator === "×") return Number(leftSide) * Number(rightSide);
+  else if (operator === "÷") {
     if (leftSide === "0" && rightSide === "0") {
       alert(`Cannot divide 0 by 0`);
       return false;
@@ -149,7 +149,7 @@ function removeLastElement(string) {
 function keyboardListener() {
   // const supportedKeys = "0123456789.*--+=Backspace";
   const digitsArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
-  const operatorsArr = ["*", "-", "/", "+", "="];
+  const operatorsArr = ["×", "-", "÷", "+", "="];
   const functionalKeysArr = ["Backspace"];
   document.addEventListener("keydown", (event) => {
     const keyName = event.key;
