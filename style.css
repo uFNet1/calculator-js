@@ -1,10 +1,23 @@
 * {
+  margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+
   background-color: black;
   /* margin: 0;
   padding: 0; */
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 26px;
+  user-select: none;
+
 }
 
 button {
@@ -16,6 +29,23 @@ button {
   border: none;
   color: white;
   transition: 250ms ease;
+}
+body {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.app {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  flex-direction: column;
+
+  overflow-y: auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.wrapper {
+  margin-bottom: 0.5rem;
 }
 
 .clear-btn {
@@ -70,6 +100,7 @@ button {
 .calculationOutput {
   color: white;
   font-size: 48px;
+  user-select: text;
 }
 
 .output {

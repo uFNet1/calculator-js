@@ -115,6 +115,8 @@ function clear() {
 
   containsDecimalLeft = false;
   containsDecimalRight = false;
+
+  removeBtn.style.opacity = "0";
 }
 
 function remove() {
@@ -133,11 +135,7 @@ function remove() {
       rightSideOtp.textContent = rightSide;
     }
   }
-  if (
-    leftSideOtp.textContent.length <= 1 ||
-    (operator !== "" && rightSideOtp.textContent.length <= 1)
-  ) {
-    console.log("test");
+  if (leftSideOtp.textContent.length <= 1 || (operator !== "" && rightSideOtp.textContent.length <= 1)) {
     removeBtn.style.opacity = "0";
   }
 }
