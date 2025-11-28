@@ -11,7 +11,8 @@ const rightSideOtp = document.querySelector("#rightSide");
 let leftSide = "";
 let operator = "";
 let rightSide = "";
-
+let isPendingReset = false;
+let previousResultVar = 0;
 let containsDecimalLeft = false;
 let containsDecimalRight = false;
 
@@ -29,12 +30,20 @@ operatorsDiv.onclick = (event) => {
 };
 clearBtn.onclick = (event) => {
   clear();
+  prevResult.textContent = "\xa0";
+  previousResultVar = null;
+  isPendingReset = false;
 };
 removeBtn.onclick = () => {
   remove();
 };
 
 function updateNumOutput(digit) {
+  if (isPendingReset) {
+    clear();
+    prevResult.textContent = previousResultVar;
+    isPendingReset = false;
+  }
   if (operator === "") {
     if (digit === "." && leftSide.includes(".")) return;
 
@@ -56,6 +65,9 @@ function updateNumOutput(digit) {
   }
 }
 function updateOperatorOutput(op) {
+  if (isPendingReset) {
+    isPendingReset = false;
+  }
   if (op === "=" && operator !== "") {
     showResult();
   } else if (op === "=" && operator === "") {
@@ -78,11 +90,15 @@ function calculateResult() {
   else if (operator === "×") result = Number(leftSide) * Number(rightSide);
   else if (operator === "÷") {
     if (leftSide === "0" && rightSide === "0") {
-      alert(`Cannot divide 0 by 0`);
       return false;
     } else result = Number(leftSide) / Number(rightSide);
   }
-  prevResult.textContent = leftSide + " " + operator + " " + rightSide;
+  if (leftSide === "") {
+    prevResult.textContent = 0 + " " + operator + " " + rightSide;
+  } else {
+    prevResult.textContent = leftSide + " " + operator + " " + rightSide;
+  }
+  previousResultVar = result;
   return result;
 }
 
@@ -101,10 +117,12 @@ function showResult() {
   clear();
   leftSide = String(result);
   leftSideOtp.textContent = result;
+  isPendingReset = true;
   return result;
 }
 
 function clear() {
+  // prevResult.textContent = `\xa0`;
   leftSide = "";
   operator = "";
   rightSide = "";
@@ -156,7 +174,12 @@ function keyboardListener() {
   const operatorsArr = ["×", "-", "÷", "+", "="];
   const functionalKeysArr = ["Backspace"];
   document.addEventListener("keydown", (event) => {
-    const keyName = event.key;
+    let keyName = event.key;
+    if (keyName === "Enter") keyName = "=";
+    if (keyName === "Escape") {
+      clear();
+      return;
+    }
     if (digitsArr.includes(keyName)) {
       updateNumOutput(keyName);
     } else if (operatorsArr.includes(keyName)) {
